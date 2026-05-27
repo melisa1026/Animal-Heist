@@ -1,0 +1,7 @@
+go.property('mommyID',hash(''))
+go.property('mommyURL',msg.url())
+
+function init(self)
+	--go.set_parent('.',self.mommyID,true)
+end
+

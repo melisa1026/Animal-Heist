@@ -1,0 +1,24 @@
+go.property('state', 1) -- for implementing different types of clicks if later desired.
+
+function init(self)
+	self.life = 1
+	self.clicked={}
+end
+function on_message(self, message_id, message, sender)
+	if message_id == hash('collision_response') and not self.clicked[message.other_id] then
+		pprint('I CLICKED', message.other_id)
+		msg.post(message.other_id, 'CLICK',{state=self.state})
+		self.clicked[message.other_id] = true
+	end
+end
+function update(self,dt)
+	self.life = self.life-dt*4
+	if self.life < 0 then
+
+		if self.state == 2 then
+			msg.post('main:/CAMERA', 'RCLICKED',{pos=go.get_position()})
+		end
+
+		go.delete('.')
+	end
+end

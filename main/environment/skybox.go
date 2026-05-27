@@ -1,0 +1,15 @@
+embedded_components {
+  id: "model"
+  type: "model"
+  data: "mesh: \"/assets/environment/skybox.glb\"\n"
+  "name: \"{{NAME}}\"\n"
+  "materials {\n"
+  "  name: \"sky\"\n"
+  "  material: \"/assets/materials/toon.material\"\n"
+  "  textures {\n"
+  "    sampler: \"tex0\"\n"
+  "    texture: \"/assets/environment/nightsky.png\"\n"
+  "  }\n"
+  "}\n"
+  ""
+}

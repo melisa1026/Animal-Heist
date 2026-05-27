@@ -1,0 +1,109 @@
+go.property('clicksOn', true)
+go.property('selectedUnit',hash(''))
+
+function check_for_click(self, mouse_x, mouse_y,btn)
+	if btn == nil then
+		btn = 1
+	end
+	-- Get the camera's position and rotation
+	local camera_pos = go.get_position(".")
+	local camera_rot = go.get_rotation(".")  -- Rotation of the camera
+
+	-- Screen dimensions
+	local window_width = self.window_width
+	local window_height = self.window_height
+	local fov = self.fov
+
+	-- Normalize mouse coordinates to [-1, 1] range
+	local ndc_x = (mouse_x / window_width) * 2 - 1
+	local ndc_y = ((mouse_y / window_height) * 2 - 1)  -- Don't flip Y for now, we handle this differently below
+
+	-- Field of view and aspect ratio
+	local aspect_ratio = self.aspect_ratio
+
+	-- Compute the ray direction in camera space
+	local ray_dir_camera_space = vmath.vector3(
+	ndc_x * aspect_ratio * math.tan(math.rad(fov / 2)),
+	ndc_y * math.tan(math.rad(fov / 2)),
+	-1  -- Forward direction in camera space
+)
+
+-- Rotate the ray direction to world space based on the camera's rotation
+local ray_dir_world_space = vmath.rotate(camera_rot, ray_dir_camera_space)
+ray_dir_world_space = vmath.normalize(ray_dir_world_space)  -- Normalize the direction
+
+-- Now check if the Y component of ray direction is flipped due to camera's rotation
+-- If the Y-axis is inverted, negate it
+if ray_dir_world_space.y > 0 then
+	ray_dir_world_space.y = -ray_dir_world_space.y  -- Invert Y if needed
+end
+
+-- Find intersection with the plane y = 0 (the floor)
+local t = -camera_pos.y / ray_dir_world_space.y  -- Solve for t where the ray hits the y=0 plane
+local hit_position = camera_pos + ray_dir_world_space * t  -- Compute the hit position
+
+-- Check if the ray hit the floor
+if hit_position then
+	print("Ray hit the floor at: " .. tostring(hit_position))
+
+	-- Spawn the object using the factory at the hit position
+	local factory_url = msg.url("#tag")  -- Replace #tag with your actual factory reference
+	factory.create(factory_url, hit_position, vmath.quat(0,0,0,0), {state=btn}, 0.2)  -- Spawn at hit_position
+else
+	print("Ray missed the floor")
+end
+end
+
+function init(self)
+-- Cache camera properties and window dimensions
+self.fovrad = go.get('#camera', "fov")
+self.fov = self.fovrad * (180 / math.pi)
+
+self.window_width = sys.get_config("display.width")
+self.window_height = sys.get_config("display.height")
+self.aspect_ratio = self.window_width / self.window_height
+print('cam-click.script init:',window_width, window_height, fov)
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("touch") and action.released and self.clicksOn then
+		local mouse_x = action.x
+		local mouse_y = action.y
+		check_for_click(self, mouse_x, mouse_y,1)
+	elseif action_id == hash("rtouch") and action.released and self.clicksOn then
+		local mouse_x = action.x
+		local mouse_y = action.y
+		check_for_click(self, mouse_x, mouse_y,2)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("window") then
+		-- Check if the window has been resized
+		if message.resize then
+			update_camera_properties(self)  -- Update cached values
+			print("Window resized. Updated properties.")
+		end
+	elseif message_id == hash("RCLICKED") then
+		msg.post(self.selectedUnit,'GOTO',{pos=message.pos})
+		print("TELLING",self.selectedUnit,"TO GO TO ",message.pos)
+	elseif message_id == hash('SELECT') then
+		print("SELECTING",message.other_url)
+		self.selectedUnit = message.other_url
+	end
+end
+
+function fixed_update(self, dt)
+-- This function is called if 'Fixed Update Frequency' is enabled in the Engine section of game.project
+-- Can be coupled with fixed updates of the physics simulation if 'Use Fixed Timestep' is enabled in
+-- Physics section of game.project
+-- Add update code here
+-- Learn more: https://defold.com/manuals/script/
+-- Remove this function if not needed
+end
+
+function on_message(self, message_id, message, sender)
+-- Add message-handling code here
+-- Learn more: https://defold.com/manuals/message-passing/
+-- Remove this function if not needed
+end

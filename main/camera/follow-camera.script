@@ -1,0 +1,19 @@
+go.property('followURL',msg.url(''))
+go.property('fixedZ',16)
+go.property('fixedY',20)
+go.property('follow_speed',2)
+
+function init(self)
+	msg.post(".", "acquire_input_focus") -- Acquire input focus for the script
+	msg.post("#camera", "acquire_camera_focus") -- Acquire camera focus
+end
+
+function update(self, dt)
+	local current_pos = go.get_position()
+	local target = go.get_position(self.followURL)
+	local targetPos = vmath.vector3(target.x, self.fixedY, self.fixedZ)
+	local t = math.min(self.follow_speed * dt, 1)
+	local new_pos = vmath.lerp(t, current_pos, targetPos)
+	go.set_position(new_pos)
+end
+

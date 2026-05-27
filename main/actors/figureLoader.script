@@ -1,0 +1,28 @@
+local HASH_LOD = hash("LOD")
+go.property('LOD',0)
+go.property('figureID',hash(''))
+go.property('figureURL',msg.url())
+
+
+local function set_lod(self, lod)
+	if self.figureID ~= hash('') then
+		go.delete(self.figureID)
+		self.figureID = hash('')
+	end
+	local myID = go.get_id()
+	self.figureID = factory.create("#LOD"..lod, nil, nil, { mommyID = myID, mommyURL = msg.url('.') }, 1)
+	local new_url = msg.url(nil, self.figureID, "model")
+	go.set("#figureLoader", "figureURL", new_url)
+	go.set_parent(self.figureID, myID, true)
+	self.LOD = lod
+end
+
+function init(self)	
+	set_lod(self,self.LOD)
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == HASH_LOD then
+		set_lod(self,message.LOD)
+	end
+end

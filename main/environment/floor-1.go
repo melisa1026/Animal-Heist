@@ -1,0 +1,17 @@
+embedded_components {
+  id: "model"
+  type: "model"
+  data: "mesh: \"/assets/environment/5x5tile.glb\"\n"
+  "skeleton: \"/assets/environment/floor.glb\"\n"
+  "animations: \"/assets/environment/floor.glb\"\n"
+  "name: \"{{NAME}}\"\n"
+  "materials {\n"
+  "  name: \"floor\"\n"
+  "  material: \"/assets/materials/toon.material\"\n"
+  "  textures {\n"
+  "    sampler: \"tex0\"\n"
+  "    texture: \"/assets/environment/Heist_Tiles_Square_512x.png\"\n"
+  "  }\n"
+  "}\n"
+  ""
+}

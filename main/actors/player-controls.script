@@ -1,0 +1,235 @@
+local HASH_up = hash("up")
+local HASH_down = hash("down")
+local HASH_left = hash("left")
+local HASH_right = hash("right")
+local HASH_shift = hash("shift")
+local HASH_lstick_left = hash("lstick_left")
+local HASH_lstick_right = hash("lstick_right")
+local HASH_lstick_up = hash("lstick_up")
+local HASH_lstick_down = hash("lstick_down")
+local HASH_rpad_up = hash("rpad_up")
+local HASH_rpad_down = hash("rpad_down")
+local HASH_rpad_left = hash("rpad_left")
+local HASH_rpad_right = hash("rpad_right")
+
+go.property('walkSpeed', 3)
+go.property('runMultiplier', 1.8)
+go.property('turnSpeed', 20)
+go.property("gamepadNumber", 0)
+go.property("deadzone", 0.15)
+go.property("keyboardCTRL", true)
+
+function init(self)
+	msg.post('.', 'acquire_input_focus')
+
+	self.hor = 0
+	self.depth = 0
+	self.yaw = 0
+	self.shift = false
+	self.away = false
+	self.correction = vmath.vector3()
+
+	self.last_pos = go.get_position()
+
+	self.current = 'idle-sw'
+	self.face_hor=0
+	self.face_depth=0
+end
+
+local function play_anim(self, anim)
+	local dir = ''
+	if self.face_depth > 0 then
+		dir = 's'
+	elseif self.face_depth < 0 then
+		dir = 'n'
+	else
+		dir = 'sw'
+	end
+	if self.face_hor > 0 then
+		dir = dir..'e'
+	elseif self.face_hor < 0 then
+		dir = dir..'w'
+	else 
+		dir = 'sw'
+	end
+	anim=anim..'-'..dir
+	if self.current ~= anim then
+		self.current = anim
+		sprite.play_flipbook('#sprite', anim, nil, {})
+		print(self.current)
+	end
+end
+
+function update(self, dt)
+
+	if self.travelTo == nil then
+		local moving = (self.hor ~= 0 or self.depth ~= 0)
+
+		local speed = self.walkSpeed
+		if self.shift and moving then
+			speed = speed * self.runMultiplier
+		end
+
+		local pos = go.get_position()
+		pos.x = pos.x + (speed * dt * self.hor)
+		pos.z = pos.z + (speed * dt * self.depth)
+
+		-- Position Finalize 
+		pos = pos + self.correction
+		self.correction = vmath.vector3()
+		go.set_position(pos)
+
+		-- 🎭 facing calculation (camera-relative)
+		local facing = get_facing_index(self, self.hor, self.depth)
+
+		-- inject facing into animation suffix
+		if self.facing then
+			local base
+			if not moving then
+				base = "idle"
+			elseif self.shift then
+				base = "run"
+			else
+				base = "walk"
+			end
+
+			play_anim(self, base .. "-" .. self.facing)
+		end
+	else -- self.travelTo is set.
+		local pos = go.get_position()
+		local dir = vmath.vector3(self.travelTo.x - pos.x,0,self.travelTo.z - pos.z)
+		local dist = vmath.length(dir)
+		-- Stop if we're basically there
+		if dist < 0.01 then
+			self.travelTo = nil
+			return
+		end
+		dir = vmath.normalize(dir)
+		-- Move toward target
+		pos = pos + dir * self.walkSpeed * dt
+		go.set_position(pos)
+		-- Face movement direction (Y rotation)
+		local angle = math.atan2(dir.x, dir.z)
+		local rot = vmath.quat_rotation_y(angle)
+		go.set_rotation(rot)
+	end
+end
+
+function update(self, dt)
+	
+	local moving = (self.hor ~= 0 or self.depth ~= 0)
+	if moving then
+		self.travelTo = nil
+	end
+	if self.travelTo then
+		local pos = go.get_position()
+		local dir = vmath.vector3(self.travelTo.x - pos.x,0,self.travelTo.z - pos.z)
+		local dist = vmath.length(dir)
+		-- Stop if we're basically there
+		if dist < 0.01 then
+			self.travelTo = nil
+			return
+		end
+		dir = vmath.normalize(dir)
+		-- Move toward target
+		pos = pos + dir * self.walkSpeed * dt
+		go.set_position(pos)
+		-- Face movement direction (Y rotation)
+		local angle = math.atan2(dir.x, dir.z)
+		local rot = vmath.quat_rotation_y(angle)
+		--go.set_rotation(rot)
+	else
+		local move = vmath.vector3(self.hor, 0, self.depth)
+
+		if vmath.length_sqr(move) > 0.0001 then
+			move = vmath.normalize(move)
+
+			local speed = self.walkSpeed
+			if self.shift then
+				speed = speed * self.runMultiplier
+			end
+
+			local pos = go.get_position()
+			pos = pos + move * speed * dt
+
+			pos = pos + self.correction
+			self.correction = vmath.vector3()
+
+			go.set_position(pos)
+		end
+
+		-- animation
+		local base
+		if not moving then
+			base = "idle"
+		elseif self.shift then
+			base = "run"
+		else
+			base = "walk"
+		end
+
+		play_anim(self, base)
+	end
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("contact_point_response") then
+		if message.distance > 0 then
+			self.correction = self.correction + (message.normal * message.distance)
+		end
+	elseif message_id == hash('CLICK') then
+		if self.flashin ~= true then
+			self.flashin = true
+			go.animate('#sprite','tint',go.PLAYBACK_ONCE_PINGPONG,vmath.vector4(1,0,0,1),go.EASING_INBACK,0.5, 0, 
+			function () 
+				self.flashin = false 
+			end)
+		end
+		pprint('SELECTED ',go.get_id())
+		msg.post('main:/CAMERA','SELECT',{other_url=msg.url('.')})
+	elseif message_id == hash("GOTO") then
+		self.travelTo = message.pos
+	end
+end
+
+function on_input(self, action_id, action)
+	-- KEYBOARD (only if enabled)
+	if self.keyboardCTRL then
+		if action_id == HASH_up then
+			self.depth = action.pressed and -1 or (action.released and 0 or self.depth)
+			self.face_depth = -1
+		elseif action_id == HASH_down then
+			self.depth = action.pressed and 1 or (action.released and 0 or self.depth)
+			self.face_depth = 1
+		elseif action_id == HASH_left then
+			self.hor = action.pressed and -1 or (action.released and 0 or self.hor)
+			self.face_hor = -1
+		elseif action_id == HASH_right then
+			self.hor = action.pressed and 1 or (action.released and 0 or self.hor)
+			self.face_hor = 1
+		elseif action_id == HASH_shift then
+			if action.pressed then self.shift = true elseif action.released then self.shift = false end
+		end
+	end
+
+	-- GAMEPAD (correct routing)
+	if self.gamepadNumber >= 0 and action.gamepad == self.gamepadNumber then
+
+		if action_id == HASH_lstick_left then
+			self.hor = -action.value
+			self.face_hor = -1
+		elseif action_id == HASH_lstick_right then
+			self.hor = action.value
+			self.face_hor = 1
+		elseif action_id == HASH_lstick_up then
+			self.depth = -action.value
+			self.face_depth = -1
+		elseif action_id == HASH_lstick_down then
+			self.depth = action.value
+			self.face_depth = 1
+		elseif action_id == HASH_rpad_right then
+			self.shift = true
+			if action.released then self.shift = false end
+		end
+	end
+end
