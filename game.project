@@ -1,0 +1,42 @@
+[bootstrap]
+main_collection = /main/main.collectionc
+
+[script]
+shared_state = 1
+
+[display]
+width = 1920
+height = 1080
+high_dpi = 1
+
+[android]
+input_method = HiddenInputField
+package = com.defold.example.basic3d
+
+[project]
+title = Animal Heist
+version = 1.1
+developer = Numo
+dependencies#0 = https://github.com/astrochili/defold-illumination/archive/refs/tags/1.0.3.zip
+
+[physics]
+type = 3D
+debug = 0
+
+[osx]
+bundle_identifier = com.defold.example.basic3d
+
+[ios]
+bundle_identifier = com.defold.example.basic3d
+
+[html5]
+scale_mode = stretch
+
+[render]
+clear_color_red = 0.160156
+clear_color_green = 0.164063
+clear_color_blue = 0.183594
+
+[input]
+gamepads = /input/gamepads.gamepadsc
+
