@@ -1,0 +1,123 @@
+images {
+  image: "/assets/actors/koochi/koochi-ne.png"
+}
+images {
+  image: "/assets/actors/koochi/koochi-se.png"
+}
+images {
+  image: "/assets/actors/koochi/koochi-se1.png"
+}
+images {
+  image: "/assets/actors/koochi/koochi-se2.png"
+}
+images {
+  image: "/assets/actors/koochi/koochi-ne2.png"
+}
+images {
+  image: "/assets/actors/koochi/koochi-ne1.png"
+}
+animations {
+  id: "idle-ne"
+  images {
+    image: "/assets/actors/koochi/koochi-ne.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "idle-nw"
+  images {
+    image: "/assets/actors/koochi/koochi-ne.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-ne"
+  images {
+    image: "/assets/actors/koochi/koochi-ne.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne1.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne2.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "walk-nw"
+  images {
+    image: "/assets/actors/koochi/koochi-ne.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne1.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne2.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-ne1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 1
+}
+animations {
+  id: "idle-se"
+  images {
+    image: "/assets/actors/koochi/koochi-se.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "idle-sw"
+  images {
+    image: "/assets/actors/koochi/koochi-se.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-se"
+  images {
+    image: "/assets/actors/koochi/koochi-se.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se1.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se2.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "walk-sw"
+  images {
+    image: "/assets/actors/koochi/koochi-se.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se1.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se2.png"
+  }
+  images {
+    image: "/assets/actors/koochi/koochi-se1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+  flip_horizontal: 1
+}
+extrude_borders: 2

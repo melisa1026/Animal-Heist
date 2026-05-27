@@ -1,0 +1,44 @@
+images {
+  image: "/assets/actors/bear/bear-back.png"
+}
+images {
+  image: "/assets/actors/bear/bear-front.png"
+}
+animations {
+  id: "walk-toward"
+  images {
+    image: "/assets/actors/bear/bear-front1.png"
+  }
+  images {
+    image: "/assets/actors/bear/bear-front2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "walk-away"
+  images {
+    image: "/assets/actors/bear/bear-back.png"
+  }
+  images {
+    image: "/assets/actors/bear/bear-back1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "idle-toward"
+  images {
+    image: "/assets/actors/bear/bear-front1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 8
+}
+animations {
+  id: "idle-away"
+  images {
+    image: "/assets/actors/bear/bear-back1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+}
+extrude_borders: 2

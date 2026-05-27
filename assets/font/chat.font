@@ -1,0 +1,11 @@
+font: "/assets/font/KawashiroGothic-Lla5.ttf"
+material: "/builtins/fonts/font.material"
+size: 29
+outline_alpha: 1.0
+outline_width: 3.0
+shadow_alpha: 0.97
+shadow_blur: 3
+shadow_x: 4.0
+shadow_y: 4.0
+render_mode: MODE_MULTI_LAYER
+characters: " !\"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"

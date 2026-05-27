@@ -1,0 +1,140 @@
+images {
+  image: "/assets/actors/bull/bull-1.png"
+}
+animations {
+  id: "idle-1"
+  images {
+    image: "/assets/actors/bull/bull-1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "idle-2"
+  images {
+    image: "/assets/actors/bull/bull-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "idle-3"
+  images {
+    image: "/assets/actors/bull/bull-3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "idle-4"
+  images {
+    image: "/assets/actors/bull/bull-4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "idle-5"
+  images {
+    image: "/assets/actors/bull/bull-4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "idle-6"
+  images {
+    image: "/assets/actors/bull/bull-3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "idle-7"
+  images {
+    image: "/assets/actors/bull/bull-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "idle-8"
+  images {
+    image: "/assets/actors/bull/bull-1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-1"
+  images {
+    image: "/assets/actors/bull/bull-1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "walk-2"
+  images {
+    image: "/assets/actors/bull/bull-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "walk-3"
+  images {
+    image: "/assets/actors/bull/bull-3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "walk-4"
+  images {
+    image: "/assets/actors/bull/bull-4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+}
+animations {
+  id: "walk-5"
+  images {
+    image: "/assets/actors/bull/bull-4.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-6"
+  images {
+    image: "/assets/actors/bull/bull-3.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-7"
+  images {
+    image: "/assets/actors/bull/bull-2.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+animations {
+  id: "walk-8"
+  images {
+    image: "/assets/actors/bull/bull-1.png"
+  }
+  playback: PLAYBACK_LOOP_FORWARD
+  fps: 4
+  flip_horizontal: 1
+}
+extrude_borders: 2
