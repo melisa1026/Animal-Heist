@@ -1,0 +1,26 @@
+animations {
+  id: "Wiggle"
+  images {
+    image: "/assets/items/mush/Mush_0001.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0002.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0003.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0004.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0005.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0006.png"
+  }
+  images {
+    image: "/assets/items/mush/Mush_0007.png"
+  }
+  fps: 8
+}
+extrude_borders: 2

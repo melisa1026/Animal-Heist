@@ -1,0 +1,34 @@
+animations {
+  id: "Idle"
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0007.png"
+  }
+  playback: PLAYBACK_NONE
+  fps: 1
+}
+animations {
+  id: "Wiggle"
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0001.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0002.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0003.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0004.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0005.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0006.png"
+  }
+  images {
+    image: "/assets/items/hotSauce/Hotsauce_0007.png"
+  }
+  fps: 8
+}
+extrude_borders: 2

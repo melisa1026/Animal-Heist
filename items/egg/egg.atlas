@@ -1,0 +1,71 @@
+animations {
+  id: "Wiggle"
+  images {
+    image: "/assets/items/egg/egg-wiggle-1.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-1a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-1b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-2.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-2a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-2b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-3.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-3a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-3b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-4.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-4a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-4b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-5.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-5a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-5b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-6.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-6a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-6b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-7.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-7a.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-7b.png"
+  }
+  images {
+    image: "/assets/items/egg/egg-wiggle-8.png"
+  }
+  fps: 12
+}
+extrude_borders: 2
