@@ -9,11 +9,15 @@ embedded_components {
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/items/egg/egg.atlas\"\n"
+  "  texture: \"/assets/items/mush/mush.atlas\"\n"
   "}\n"
   ""
   position {
-    y: 0.7
+    y: -17.0
+  }
+  scale {
+    x: 0.5
+    y: 0.5
     z: 0.5
   }
 }

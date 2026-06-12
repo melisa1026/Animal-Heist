@@ -1,0 +1,78 @@
+-- player.script
+
+-- Doubled movement speed property
+go.property("speed", 700)
+
+function init(self)
+	-- Acquire input focus so this script receives the triggers
+	msg.post(".", "acquire_input_focus")
+
+	-- Track movement input vectors
+	self.input = vmath.vector3()
+	-- Track current animation state to avoid restarting it every frame
+	self.current_anim = nil
+	-- Track facing direction (true = flipped/left, false = normal/right)
+	self.flipped = false
+	-- Vector to accumulate collision separation data during the frame
+	self.correction = vmath.vector3()
+end
+
+function update(self, dt)
+	self.correction = vmath.vector3()
+	if vmath.length_sqr(self.input) > 0 then
+		self.input = vmath.normalize(self.input)
+	end
+	-- Calculate movement and update position
+	local pos = go.get_position()
+	pos = pos + self.input * self.speed * dt
+	go.set_position(pos)
+	if vmath.length_sqr(self.input) > 0 then
+		if self.current_anim ~= hash("Walk") then
+			sprite.play_flipbook("#sprite", hash("Walk"))
+			self.current_anim = hash("Walk")
+		end
+		-- Handle flipping based on horizontal movement
+		if self.input.x < 0 and not self.flipped then
+			sprite.set_hflip("#sprite", true)
+			self.flipped = true
+		elseif self.input.x > 0 and self.flipped then
+			sprite.set_hflip("#sprite", false)
+			self.flipped = false
+		end
+	else
+		-- Play Idle animation if standing still
+		if self.current_anim ~= hash("Idle") then
+			sprite.play_flipbook("#sprite", hash("Idle"))
+			self.current_anim = hash("Idle")
+		end
+	end
+	self.input = vmath.vector3()
+end
+
+function on_message(self, message_id, message, sender)
+	-- Handle Kinematic Collisions
+	if message_id == hash("contact_point_response") then
+		if message.distance > 0 then
+			local proj = vmath.project(self.correction, message.normal * message.distance)
+			if proj < 1 then
+				local comp = (message.distance - message.distance * proj) * message.normal
+				go.set_position(go.get_position() + comp)
+				self.correction = self.correction + comp
+			end
+		end
+	end
+end
+
+function on_input(self, action_id, action)
+	if action_id == hash("left") or action_id == hash("leftArrow") then
+		self.input.x = -1
+	elseif action_id == hash("right") or action_id == hash("rightArrow") then
+		self.input.x = 1
+	end
+
+	if action_id == hash("up") or action_id == hash("upArrow") then
+		self.input.y = 0.5
+	elseif action_id == hash("down") or action_id == hash("downArrow") then
+		self.input.y = -0.5
+	end
+end

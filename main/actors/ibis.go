@@ -1,26 +1,31 @@
+components {
+  id: "player"
+  component: "/main/actors/player.script"
+}
 embedded_components {
   id: "sprite"
   type: "sprite"
-  data: "default_animation: \"basket\"\n"
+  data: "default_animation: \"Walk\"\n"
   "material: \"/builtins/materials/sprite.material\"\n"
   "textures {\n"
   "  sampler: \"texture_sampler\"\n"
-  "  texture: \"/assets/items/basket.atlas\"\n"
+  "  texture: \"/assets/actors/ibis/ibis.atlas\"\n"
   "}\n"
   ""
   position {
-    z: -0.1
+    y: 75.0
+    z: 1.0
   }
   scale {
-    x: 0.25
-    y: 0.25
-    z: 0.25
+    x: 0.75
+    y: 0.75
+    z: 0.75
   }
 }
 embedded_components {
   id: "collisionobject"
   type: "collisionobject"
-  data: "type: COLLISION_OBJECT_TYPE_STATIC\n"
+  data: "type: COLLISION_OBJECT_TYPE_KINEMATIC\n"
   "mass: 0.0\n"
   "friction: 0.1\n"
   "restitution: 0.5\n"
@@ -30,7 +35,7 @@ embedded_components {
   "  shapes {\n"
   "    shape_type: TYPE_BOX\n"
   "    position {\n"
-  "      y: -16.0\n"
+  "      y: -49.0\n"
   "    }\n"
   "    rotation {\n"
   "    }\n"
@@ -38,9 +43,9 @@ embedded_components {
   "    count: 3\n"
   "    id: \"box\"\n"
   "  }\n"
-  "  data: 64.0\n"
+  "  data: 72.5\n"
   "  data: 48.0\n"
-  "  data: 64.0\n"
+  "  data: 10.0\n"
   "}\n"
   ""
 }

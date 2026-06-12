@@ -1,213 +1,91 @@
 name: "main"
 instances {
-  id: "CAMERA"
-  prototype: "/main/camera/CAMERA.go"
+  id: "ibis"
+  prototype: "/main/actors/ibis.go"
+  children: "camera"
   position {
-    y: 16.0
-    z: 15.0
-  }
-  rotation {
-    x: -0.25881904
-    w: 0.9659258
+    x: 550.0
   }
 }
 instances {
-  id: "player"
-  prototype: "/main/actors/player-koochi.go"
+  id: "camera"
+  prototype: "/main/camera/camera.go"
   position {
-    z: -3.0
-  }
-}
-instances {
-  id: "floor-1"
-  prototype: "/main/environment/floor-1.go"
-  position {
-    z: -5.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-}
-instances {
-  id: "wall-1"
-  prototype: "/main/environment/wall-1.go"
-  position {
-    x: -3.5
-    z: -8.5
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-}
-instances {
-  id: "skybox"
-  prototype: "/main/environment/skybox.go"
-}
-instances {
-  id: "skybox1"
-  prototype: "/main/environment/skybox.go"
-  rotation {
-    x: 1.0
-    w: 6.123234E-17
-  }
-}
-instances {
-  id: "floor-"
-  prototype: "/main/environment/floor-1.go"
-  position {
-    x: 7.0
-    z: -12.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-}
-instances {
-  id: "wall-"
-  prototype: "/main/environment/wall-1.go"
-  position {
-    x: 3.5
-    z: -15.5
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
+    z: 943.0
   }
 }
 instances {
   id: "basket"
   prototype: "/main/environment/basket.go"
   position {
-    x: 7.0
-    z: -10.0
+    x: 1077.0
   }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 2.0
+}
+instances {
+  id: "peas"
+  prototype: "/main/item/peas.go"
+  position {
+    x: 1224.0
+    y: 73.0
   }
 }
 instances {
   id: "basket1"
   prototype: "/main/environment/basket.go"
   position {
-    x: 3.0
-    z: -10.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 2.0
+    x: 1212.0
   }
 }
 instances {
-  id: "basket2"
-  prototype: "/main/environment/basket.go"
+  id: "hotSauce"
+  prototype: "/main/item/hotSauce.go"
   position {
-    x: 5.0
-    z: -8.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
+    x: 1539.0
+    y: 115.0
   }
   scale3 {
-    x: 2.0
-    y: 2.0
-    z: 2.0
-  }
-}
-instances {
-  id: "basket3"
-  prototype: "/main/environment/basket.go"
-  position {
-    x: 5.0
-    z: -12.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-  scale3 {
-    x: 2.0
-    y: 2.0
-    z: 2.0
+    x: 0.6
+    y: 0.6
+    z: 0.6
   }
 }
 instances {
   id: "egg"
   prototype: "/main/environment/egg.go"
   position {
-    x: -3.5
-    z: -3.5
+    x: 1076.0
+    y: 79.0
+  }
+  scale3 {
+    x: 0.25
+    y: 0.25
+    z: 0.25
   }
 }
 instances {
-  id: "egg1"
-  prototype: "/main/environment/egg.go"
+  id: "basket2"
+  prototype: "/main/environment/basket.go"
   position {
-    x: 5.0
-    y: 2.0
-    z: -8.0
+    x: 1666.0
   }
 }
 instances {
-  id: "floor-2"
-  prototype: "/main/environment/floor-1.go"
+  id: "mush"
+  prototype: "/main/item/mush.go"
   position {
-    x: 14.0
-    z: -5.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
+    x: 1667.0
+    y: 118.0
   }
 }
 instances {
-  id: "floor-3"
-  prototype: "/main/environment/floor-1.go"
-  position {
-    x: 7.0
-    z: 2.0
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
+  id: "lvl1"
+  prototype: "/main/environment/lvl1.go"
 }
 instances {
-  id: "wall-4"
-  prototype: "/main/environment/wall-1.go"
+  id: "basket3"
+  prototype: "/main/environment/basket.go"
   position {
-    x: 17.5
-    z: -1.5
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
-  }
-}
-instances {
-  id: "wall-5"
-  prototype: "/main/environment/wall-1.go"
-  position {
-    x: 10.5
-    z: 5.5
-  }
-  rotation {
-    y: 0.38268343
-    w: 0.9238795
+    x: 1532.0
   }
 }
 scale_along_z: 1
